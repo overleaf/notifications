@@ -81,6 +81,13 @@ module.exports = Notifications =
 			key: notification_key
 		db.notifications.remove searchOps, {justOne: true}, callback
 
+	removeNotificationIpMatcher: (user_id, university_id, callback)->
+		searchOps =
+			user_id: ObjectId(user_id)
+			"messageOpts.university_id": parseInt(university_id)
+		updateOperation =
+			"$unset": {templateKey:true, messageOpts: true}
+		db.notifications.update searchOps, updateOperation, callback
 
 [
 	'getUserNotifications',

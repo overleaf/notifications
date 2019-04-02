@@ -31,6 +31,13 @@ module.exports =
 		Notifications.removeNotificationKey req.params.user_id, req.body.key, (err, notifications)->
 			res.send()
 
+  # custom mark as read to search by university_id message opt
+	removeNotificationIpMatcher: (req, res)->
+		logger.log user_id: req.params.user_id, query: req.params.university_id, "mark notification as read by university id"
+		metrics.inc "removeNotificationKey"
+		Notifications.removeNotificationIpMatcher req.params.user_id, req.params.university_id, (err, notifications)->
+			res.send()
+
 	removeNotificationByKeyOnly: (req, res)->
 		notification_key = req.params.key
 		logger.log {notification_key}, "mark notification as read by key only"

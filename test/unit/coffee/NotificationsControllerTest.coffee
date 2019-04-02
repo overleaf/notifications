@@ -74,3 +74,14 @@ describe 'Notifications Controller', ->
 			@controller.removeNotificationByKeyOnly req, send:(result)=>
 				@notifications.removeNotificationByKeyOnly.calledWith(notification_key).should.equal true
 				done()
+
+	describe "removeNotificationIpMatcher", ->
+		it "should tell the notifications to mark the notification as read by university id", (done)->
+			@notifications.removeNotificationIpMatcher = sinon.stub().callsArgWith(2)
+			req =
+				params:
+					user_id: user_id
+					university_id: 10
+			@controller.removeNotificationIpMatcher req, send:(result)=>
+				@notifications.removeNotificationIpMatcher.calledWith(user_id, 10).should.equal true
+				done()

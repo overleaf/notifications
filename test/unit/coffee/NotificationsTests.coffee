@@ -200,3 +200,18 @@ describe 'Notifications Tests', ->
 				assert.deepEqual(@removeStub.args[0][0], searchOps)
 				assert.deepEqual(@removeStub.args[0][1], opts)
 				done()
+
+	describe 'removeNotificationIpMatcher', ->
+		it 'should mark the notification key as read', (done)->
+			@updateStub.callsArgWith(2, null)
+			university_id = 10
+
+			@notifications.removeNotificationIpMatcher user_id, university_id, (err)=>
+				searchOps =
+					user_id: ObjectId(user_id)
+					'messageOpts.university_id': university_id
+				updateOperation =
+					"$unset": {templateKey:true, messageOpts: true}
+				assert.deepEqual(@updateStub.args[0][0], searchOps)
+				assert.deepEqual(@updateStub.args[0][1], updateOperation)
+				done()

@@ -26,6 +26,7 @@ app.post '/user/:user_id', controller.addNotification
 app.get '/user/:user_id', controller.getUserNotifications
 app.del '/user/:user_id/notification/:notification_id', controller.removeNotificationId
 app.del '/user/:user_id', controller.removeNotificationKey
+app.del '/user/:user_id/ip_matcher/:university_id', controller.removeNotificationIpMatcher
 app.del '/key/:key', controller.removeNotificationByKeyOnly
 
 app.get '/status', (req, res)->
