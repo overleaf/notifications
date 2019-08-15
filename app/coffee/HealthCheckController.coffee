@@ -30,7 +30,7 @@ module.exports =
 				request.get opts, (err, res, body)->
 					if err?
 						logger.err err:err, "Health Check: error getting notification"
-						return callback(err)
+						return cb(err)
 					else if res.statusCode != 200
 						e = "status code not 200 #{res.statusCode}"
 						logger.err err:err, e
